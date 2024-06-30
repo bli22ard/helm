@@ -62,6 +62,7 @@ type repoAddOptions struct {
 
 	// Deprecated, but cannot be removed until Helm 4
 	deprecatedNoUpdate bool
+	repoProxyUrl       string
 }
 
 func newRepoAddCmd(out io.Writer) *cobra.Command {
@@ -94,7 +95,7 @@ func newRepoAddCmd(out io.Writer) *cobra.Command {
 	f.BoolVar(&o.insecureSkipTLSverify, "insecure-skip-tls-verify", false, "skip tls certificate checks for the repository")
 	f.BoolVar(&o.allowDeprecatedRepos, "allow-deprecated-repos", false, "by default, this command will not allow adding official repos that have been permanently deleted. This disables that behavior")
 	f.BoolVar(&o.passCredentialsAll, "pass-credentials", false, "pass credentials to all domains")
-
+	f.StringVar(&o.repoProxyUrl, "repo-proxy-url", "", "proxy for accessing the repository and its URL format follows the global option --proxy-url")
 	return cmd
 }
 
@@ -174,6 +175,8 @@ func (o *repoAddOptions) run(out io.Writer) error {
 		KeyFile:               o.keyFile,
 		CAFile:                o.caFile,
 		InsecureSkipTLSverify: o.insecureSkipTLSverify,
+		RepoProxyUrl:          o.repoProxyUrl,
+		EnvSettingsProxyUrl:   settings.ProxyUrl,
 	}
 
 	// Check if the repo name is legal
