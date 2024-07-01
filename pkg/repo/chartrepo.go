@@ -51,7 +51,7 @@ type Entry struct {
 	RepoProxyUrl          string `json:"repo_proxy_url"`
 	// This field is for handling proxy URL priority in NewChartRepository,
 	// and will not actually store any data.
-	EnvSettingsProxyUrl string `json:"-"`
+	DoNotUseEnvSettingsProxyUrl string `json:"-"`
 }
 
 // ChartRepository represents a chart repository
@@ -72,8 +72,8 @@ func NewChartRepository(cfg *Entry, getters getter.Providers) (*ChartRepository,
 	var proxyUrl string
 	if cfg.RepoProxyUrl != "" {
 		proxyUrl = cfg.RepoProxyUrl
-	} else if cfg.EnvSettingsProxyUrl != "" {
-		proxyUrl = cfg.EnvSettingsProxyUrl
+	} else if cfg.DoNotUseEnvSettingsProxyUrl != "" {
+		proxyUrl = cfg.DoNotUseEnvSettingsProxyUrl
 	}
 	client, err := getters.ByScheme(u.Scheme, getter.WithProxyUrl(proxyUrl))
 	if err != nil {

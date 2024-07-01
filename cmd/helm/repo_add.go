@@ -166,17 +166,17 @@ func (o *repoAddOptions) run(out io.Writer) error {
 	}
 
 	c := repo.Entry{
-		Name:                  o.name,
-		URL:                   o.url,
-		Username:              o.username,
-		Password:              o.password,
-		PassCredentialsAll:    o.passCredentialsAll,
-		CertFile:              o.certFile,
-		KeyFile:               o.keyFile,
-		CAFile:                o.caFile,
-		InsecureSkipTLSverify: o.insecureSkipTLSverify,
-		RepoProxyUrl:          o.repoProxyUrl,
-		EnvSettingsProxyUrl:   settings.ProxyUrl,
+		Name:                        o.name,
+		URL:                         o.url,
+		Username:                    o.username,
+		Password:                    o.password,
+		PassCredentialsAll:          o.passCredentialsAll,
+		CertFile:                    o.certFile,
+		KeyFile:                     o.keyFile,
+		CAFile:                      o.caFile,
+		InsecureSkipTLSverify:       o.insecureSkipTLSverify,
+		RepoProxyUrl:                o.repoProxyUrl,
+		DoNotUseEnvSettingsProxyUrl: settings.ProxyUrl,
 	}
 
 	// Check if the repo name is legal
